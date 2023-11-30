@@ -8,7 +8,7 @@ export const AppDataSource= new DataSource({
     type: 'mysql',
     host:  'localhost',
     username: 'root',
-    password:'  !',
+    password: 'Adminadmin1!',
     database: 'api_equipo2',
     port:3306,
     entities: [Actividad, Imagen, Viaje],
