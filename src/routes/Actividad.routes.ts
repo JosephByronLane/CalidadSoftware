@@ -5,6 +5,6 @@ const router = Router();
 
 router.post('/actividad',AgregarActividad);
 router.delete('/actividad', BorrarActividad);
-router.get('/actividad', ConseguirActividades)
+router.get('/actividad', ConseguirActividades);
 
 export default router

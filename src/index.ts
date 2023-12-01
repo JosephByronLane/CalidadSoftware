@@ -9,6 +9,7 @@ app.use(express.json());
 AppDataSource.initialize()
     .then(() => {
         console.log('Data Source has been initialized')
+        console.log('CalidadAPI')
 
         app.listen(3000, () => {
             console.log('Server is running on port 3000');

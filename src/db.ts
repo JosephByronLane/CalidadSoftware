@@ -9,7 +9,7 @@ export const AppDataSource= new DataSource({
     host:  'localhost',
     username: 'root',
     password: 'Adminadmin1!',
-    database: 'api_equipo2',
+    database: 'ordinario_Calidad',
     port:3306,
     entities: [Actividad, Imagen, Viaje],
     logging: true,

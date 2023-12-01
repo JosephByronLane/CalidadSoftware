@@ -12,16 +12,16 @@ class Viaje {
   id!: number;
 
   @Column("varchar")
-  nombre!: string;
+  nombre: string;
 
   @Column("datetime")
-  fecha_inicio!: Date;
+  fecha_inicio: Date;
 
   @Column("datetime")
-  fecha_final!: Date;
+  fecha_final: Date;
 
   @Column("varchar")
-  tipo!: string;
+  tipo: string;
 
   @Column("varchar")
   notas!: string;
