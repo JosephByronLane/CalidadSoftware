@@ -1,9 +1,9 @@
 import {Router} from 'express'
-import { AgregarImagen } from '../controllers/Imagen.controller';
+import { AgregarImagen, ConseguirImagenes } from '../controllers/Imagen.controller';
 
 const router = Router();
 
-router.get('/actividad',AgregarImagen);
-
+router.post('/actividad',AgregarImagen);
+router.get('/ConseguirImagenes', ConseguirImagenes)
 
 export default router

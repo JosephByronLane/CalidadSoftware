@@ -5,3 +5,8 @@ export const AgregarImagen = async (req: Request, res: Response) => {
     /////PONGAN EL CODIGO AQUI PARA AGREGAR UNA IMAGEN.
 
 };
+
+export const ConseguirImagenes = async (req: Request, res: Response) => {
+    /////PONGAN EL CODIGO AQUI PARA AGREGAR UNA IMAGEN.
+
+};

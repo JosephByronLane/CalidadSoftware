@@ -9,3 +9,7 @@ export const RegistrarViaje = async (req: Request, res: Response) => {
 export const AgregarNotas = async (req: Request, res: Response) => {
     /////PONGAN EL CODIGO AQUI PARA EDITAR/AGREGAR NOTAS.    
 };
+
+export const ConseguirNotas = async (req: Request, res: Response) => {
+    /////PONGAN EL CODIGO AQUI PARA EDITAR/AGREGAR NOTAS.    
+};

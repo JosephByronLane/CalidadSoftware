@@ -9,4 +9,7 @@ export const BorrarActividad = async (req: Request, res: Response) => {
     /////PONGAN EL CODIGO AQUI PARA AGREGAR UNA IMAGEN.
 };
 
+export const ConseguirActividades = async (req: Request, res: Response) => {
+    /////PONGAN EL CODIGO AQUI PARA AGREGAR UNA IMAGEN.
+};
 
