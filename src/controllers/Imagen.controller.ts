@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { AppDataSource } from '../db';
 import { Imagen } from '../models/Imagen';
 import { Actividad } from '../models/Actividad';
+import { Viaje } from '../models/Viaje';
 
 export async function AgregarImagen(req: Request, res: Response): Promise<Response> {
     const { viajeId, actividadId } = req.params;
@@ -31,7 +32,12 @@ export async function AgregarImagen(req: Request, res: Response): Promise<Respon
 
   export async function ConseguirImagenes(req: Request, res: Response): Promise<Response> {
     const { viajeId, actividadId } = req.params;
-  
+    const viaje = await Viaje.findOneBy({
+      id:parseInt(viajeId)
+    });    
+    if(!viaje){
+      return res.status(404).json({ message: "Active Actividad not found." });
+    }
     try {
       const imagenes = await AppDataSource.manager.findBy(Imagen, {
         actividad: { id: parseInt(actividadId), viaje: { id: parseInt(viajeId) } }

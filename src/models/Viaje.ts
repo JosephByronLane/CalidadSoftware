@@ -3,11 +3,12 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToMany,
+  BaseEntity,
 } from "typeorm";
 import { Actividad } from "./Actividad";
 
 @Entity()
-class Viaje {
+class Viaje extends BaseEntity{
   @PrimaryGeneratedColumn()
   id!: number;
 

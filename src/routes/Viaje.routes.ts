@@ -7,8 +7,6 @@ router.post('/viaje',RegistrarViaje);
 router.get('/viaje',ConseguirViajes);
 router.get('/viaje/:id',ConseguirViaje);
 
-
-router.post('viajes/nota',AgregarNotas );
-
+router.post('/viajes/nota',AgregarNotas );
 
 export default router
