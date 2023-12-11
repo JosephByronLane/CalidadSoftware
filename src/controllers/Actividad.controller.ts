@@ -29,13 +29,22 @@ export async function ConseguirActividades(req: Request, res: Response): Promise
   const { viajeId } = req.params;
 
   try {
+    const viaje = await Viaje.findOneBy({
+      id:parseInt(viajeId)
+    });    
+    if(!viaje){
+      return res.status(404).json({ message: "Active Actividad not found." });
+    }
     const actividades = await AppDataSource.manager.findBy(Actividad, {
       viaje: { id: parseInt(viajeId) },
       activo: 1
     });
 
-    return res.json(actividades);
-  } catch (error) {
+    if (actividades) {
+      return res.json(actividades);
+    } else {
+      return res.status(404).json({ message: "Active Actividad not found." });
+    }  } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Hubo un problema ", error:error });
   }
