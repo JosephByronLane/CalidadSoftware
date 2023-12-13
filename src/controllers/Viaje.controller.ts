@@ -3,9 +3,9 @@ import { AppDataSource } from '../db';
 import { Viaje } from '../models/Viaje';
 
 export async function RegistrarViaje(req: Request, res: Response): Promise<Response> {
-  const { nombre, fecha_inicio, fecha_final, tipo } = req.body;
+  const { nombre, fecha_inicio,destino, fecha_final, tipo } = req.body;
   
-  if (!nombre || !fecha_inicio || !fecha_final || !tipo) {
+  if (!nombre || !fecha_inicio || !fecha_final || !tipo || !destino)  {
     return res.status(400).json({ message: "Todos los campos son requeridos." });
   }
 
@@ -15,6 +15,7 @@ export async function RegistrarViaje(req: Request, res: Response): Promise<Respo
     newViaje.fecha_inicio = fecha_inicio;
     newViaje.fecha_final = fecha_final;
     newViaje.tipo = tipo;
+    newViaje.destino = destino;
     newViaje.notas = ''; 
 
     const viaje = await AppDataSource.manager.save(newViaje);

@@ -22,6 +22,9 @@ class Viaje extends BaseEntity{
   fecha_final: Date;
 
   @Column("varchar")
+  destino: string;
+  
+  @Column("varchar")
   tipo: string;
 
   @Column("varchar")
