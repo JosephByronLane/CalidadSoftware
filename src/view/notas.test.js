@@ -52,14 +52,18 @@
 
     test('should not post trip note if textarea is empty', async () => {
       fetch.mockResponseOnce(JSON.stringify({}));
-      
+  
       document.body.innerHTML = '<textarea id="floatingTextarea"></textarea>';
       document.querySelector('#floatingTextarea').value = ''; // Set an empty value for the textarea
-    
+  
       await PostNotaViaje(1);
-    
-      expect(fetch).not.toHaveBeenCalled(); // Expect fetch NOT to have been called
-    });
-    
+  
+      expect(fetch).toHaveBeenCalledTimes(1); // Expect fetch to have been called
+      expect(fetch).toHaveBeenCalledWith('http://54.196.52.240:3000/viajes/nota', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: 1, notas: '' }) // Validate the body sent in the fetch call
+      });
+    });   
   });
 
