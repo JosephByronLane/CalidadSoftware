@@ -3,6 +3,7 @@ import { AppDataSource } from '../db';
 import { Actividad } from '../models/Actividad';
 import { Viaje } from '../models/Viaje';
 
+
 export async function AgregarActividad(req: Request, res: Response): Promise<Response> {
   const { viajeId } = req.params;
   const actividadData = req.body;
@@ -90,5 +91,42 @@ export async function BorrarActividad(req: Request, res: Response): Promise<Resp
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Hubo un problema ", error:error });
+  }
+}
+
+export async function EditarActividad(req: Request, res: Response): Promise<Response> {
+  const { viajeId, actividadId } = req.params;
+  const newData = req.body; // This will contain the new data for the actividad
+
+  // Start a transaction
+  const queryRunner = AppDataSource.createQueryRunner();
+  await queryRunner.connect();
+  await queryRunner.startTransaction();
+
+  try {
+    // Find the actividad within a transaction
+    const actividad = await queryRunner.manager.findOneBy(Actividad, {
+      id: parseInt(actividadId),
+      viaje: { id: parseInt(viajeId) }
+    });
+
+    if (!actividad) {
+      await queryRunner.rollbackTransaction();
+      return res.status(404).json({ message: "Actividad not found." });
+    }
+    console.log(actividad)
+    Object.assign(actividad, newData);
+
+    await queryRunner.manager.save(Actividad, actividad);
+    await queryRunner.commitTransaction();
+    return res.status(200).json({ message: "Actividad has been updated.", actividad });
+  } catch (error) {
+    // If we catch any error we rollback the changes
+    await queryRunner.rollbackTransaction();
+    console.error(error);
+    return res.status(500).json({ message: "There was a problem updating the actividad.", error: error });
+  } finally {
+    // You need to release a queryRunner which was manually instantiated
+    await queryRunner.release();
   }
 }

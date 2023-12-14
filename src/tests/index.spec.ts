@@ -213,8 +213,6 @@ describe('GET /viaje/:viajeId/actividad/:actividadId', () => {
     }
   });
   it('should retrieve a specific actividad with correct structure', async () => {
-    const viajeId = 1; // Replace with a valid viaje ID
-    const actividadId = 1; // Replace with a valid actividad ID
     const res = await request(app).get(`/viaje/1/actividad/${validId}`);
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty('id');

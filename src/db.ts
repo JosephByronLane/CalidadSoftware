@@ -13,6 +13,6 @@ export const AppDataSource= new DataSource({
     port:3306,
     entities: [Actividad, Imagen, Viaje],
     logging: true,
-    synchronize: false  
+    synchronize: true  
 })
     
