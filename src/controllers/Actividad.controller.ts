@@ -1,43 +1,132 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../db';
 import { Actividad } from '../models/Actividad';
+import { Viaje } from '../models/Viaje';
 
-export async function AgregarActividad(req: Request, res: Response) {
-  const actividadRepository = AppDataSource.getRepository(Actividad);
+
+export async function AgregarActividad(req: Request, res: Response): Promise<Response> {
+  const { viajeId } = req.params;
+  const actividadData = req.body;
 
   try {
-    const nuevaActividad = actividadRepository.create(req.body);
-    const resultado = await actividadRepository.save(nuevaActividad);
-    res.status(201).json(resultado);
+    const viaje = await AppDataSource.manager.findOneBy(Viaje, { id: parseInt(viajeId) });
+    if (!viaje) {
+      return res.status(404).json({ message: "Viaje no encontrado." });
+    }
+
+    const nuevaActividad = new Actividad();
+    Object.assign(nuevaActividad, actividadData);
+    nuevaActividad.viaje = viaje;
+
+    await AppDataSource.manager.save(Actividad, nuevaActividad);
+    return res.status(201).json(nuevaActividad);
   } catch (error) {
-    res.status(500).json({ message: "Error al agregar actividad", error });
+    console.error(error);
+    return res.status(500).json({ message: "Hubo un problema ", error:error });
   }
 }
 
-export async function BorrarActividad(req: Request, res: Response) {
-  const actividadRepository = AppDataSource.getRepository(Actividad);
-  const { id } = req.params; // Assumes you're sending the ID as a URL parameter
+export async function ConseguirActividades(req: Request, res: Response): Promise<Response> {
+  const { viajeId } = req.params;
 
   try {
-    const actividad = await actividadRepository.findOneBy({ id: parseInt(id) });
-    if (actividad) {
-      await actividadRepository.remove(actividad);
-      res.status(200).json({ message: "Actividad eliminada con éxito" });
+    const viaje = await Viaje.findOneBy({
+      id:parseInt(viajeId)
+    });    
+    if(!viaje){
+      return res.status(404).json({ message: "Active Actividad not found." });
+    }
+    const actividades = await AppDataSource.manager.findBy(Actividad, {
+      viaje: { id: parseInt(viajeId) },
+      activo: 1
+    });
+
+    if (actividades) {
+      return res.json(actividades);
     } else {
-      res.status(404).json({ message: "Actividad no encontrada" });
+      return res.status(404).json({ message: "Active Actividad not found." });
+    }  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Hubo un problema ", error:error });
+  }
+}
+
+export async function ConseguirActividad(req: Request, res: Response): Promise<Response> {
+  const { viajeId, actividadId } = req.params;
+
+  try {
+    const actividad = await AppDataSource.manager.findOneBy(Actividad, {
+      id: parseInt(actividadId),
+      viaje: { id: parseInt(viajeId) },
+      activo: 1
+    });
+
+    if (actividad) {
+      return res.json(actividad);
+    } else {
+      return res.status(404).json({ message: "Active Actividad not found." });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error al borrar actividad", error });
+    console.error(error);
+    return res.status(500).json({ message: "Hubo un problema ", error:error });
   }
 }
 
-export async function ConseguirActividades(req: Request, res: Response) {
-  const actividadRepository = AppDataSource.getRepository(Actividad);
+export async function BorrarActividad(req: Request, res: Response): Promise<Response> {
+  const { viajeId, actividadId } = req.params;
 
   try {
-    const actividades = await actividadRepository.find();
-    res.json(actividades);
+    const actividad = await AppDataSource.manager.findOneBy(Actividad, {
+      id: parseInt(actividadId),
+      viaje: { id: parseInt(viajeId) }
+    });
+
+    if (!actividad) {
+      return res.status(404).json({ message: "Actividad not found." });
+    }
+
+    actividad.activo = 0;
+    await AppDataSource.manager.save(Actividad, actividad);
+    return res.status(200).json({ message: "Actividad ha sido borrada." });
   } catch (error) {
-    res.status(500).json({ message: "Error al obtener actividades", error });
+    console.error(error);
+    return res.status(500).json({ message: "Hubo un problema ", error:error });
+  }
+}
+
+export async function EditarActividad(req: Request, res: Response): Promise<Response> {
+  const { viajeId, actividadId } = req.params;
+  const newData = req.body; // This will contain the new data for the actividad
+
+  // Start a transaction
+  const queryRunner = AppDataSource.createQueryRunner();
+  await queryRunner.connect();
+  await queryRunner.startTransaction();
+
+  try {
+    // Find the actividad within a transaction
+    const actividad = await queryRunner.manager.findOneBy(Actividad, {
+      id: parseInt(actividadId),
+      viaje: { id: parseInt(viajeId) }
+    });
+
+    if (!actividad) {
+      await queryRunner.rollbackTransaction();
+      return res.status(404).json({ message: "Actividad not found." });
+    }
+    console.log(actividad)
+    Object.assign(actividad, newData);
+
+    await queryRunner.manager.save(Actividad, actividad);
+    await queryRunner.commitTransaction();
+    return res.status(200).json({ message: "Actividad has been updated.", actividad });
+  } catch (error) {
+    // If we catch any error we rollback the changes
+    await queryRunner.rollbackTransaction();
+    console.error(error);
+    return res.status(500).json({ message: "There was a problem updating the actividad.", error: error });
+  } finally {
+    // You need to release a queryRunner which was manually instantiated
+    await queryRunner.release();
   }
 }

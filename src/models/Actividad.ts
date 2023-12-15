@@ -26,8 +26,8 @@ class Actividad {
   @Column("datetime")
   fecha_final!: Date;
 
-  @Column("boolean")
-  activo!: boolean;
+  @Column({type: 'tinyint', default: 1})
+  activo: number;
 
   @ManyToOne(() => Viaje, (viaje) => viaje.actividades)
   @JoinColumn({ name: "ViajeId" })

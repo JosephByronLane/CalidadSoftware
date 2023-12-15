@@ -3,11 +3,12 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToMany,
+  BaseEntity,
 } from "typeorm";
 import { Actividad } from "./Actividad";
 
 @Entity()
-class Viaje {
+class Viaje extends BaseEntity{
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -20,6 +21,9 @@ class Viaje {
   @Column("datetime")
   fecha_final: Date;
 
+  @Column("varchar")
+  destino: string;
+  
   @Column("varchar")
   tipo: string;
 

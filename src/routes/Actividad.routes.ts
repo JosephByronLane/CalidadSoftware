@@ -1,10 +1,12 @@
 import {Router} from 'express'
-import { AgregarActividad, BorrarActividad, ConseguirActividades } from '../controllers/Actividad.controller';
+import { AgregarActividad, BorrarActividad, ConseguirActividad, ConseguirActividades, EditarActividad } from '../controllers/Actividad.controller';
 
 const router = Router();
 
-router.post('/actividad',AgregarActividad);
-router.delete('/actividad', BorrarActividad);
-router.get('/actividad', ConseguirActividades);
+router.post('/viaje/:viajeId/actividad',AgregarActividad);
+router.delete('/viaje/:viajeId/actividad/:actividadId', BorrarActividad);
+router.get('/viaje/:viajeId/actividad', ConseguirActividades);
+router.get('/viaje/:viajeId/actividad/:actividadId', ConseguirActividad);
+router.put('/viaje/:viajeId/actividad/:actividadId', EditarActividad);
 
 export default router
