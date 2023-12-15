@@ -1,0 +1,33 @@
+.form-floating{
+    width: 50%;
+}
+
+.form-floating textarea.form-control {
+    box-shadow: 5px 10px 15px rgba(0, 0, .4, .5);
+    background-color: #FED700;
+    border-radius: 0;
+    height: 200px;
+}
+
+.regresar{
+    padding: 2% 0 0 20%;
+}
+
+.notayg {
+    padding: 30px 0 0 0;
+    padding-left: 30%;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.form-floating label {
+    align-self: flex-start;
+    margin-bottom: 0.5rem; /* Ajusta el margen inferior según sea necesario */
+}
+
+.btn {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Agrega el efecto de dropshadow */
+}
+
