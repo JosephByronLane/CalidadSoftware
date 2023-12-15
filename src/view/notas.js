@@ -2,17 +2,6 @@ const textarea = document.getElementById("floatingTextarea");
 const btnguardar = document.querySelector(".guardar");
 let clicked = false;
 
-//comenta toda esta parte para hacer las pruebas
-// export function addLineBreakOnClick() {
-//     textarea.addEventListener("click", function() {
-//         if (!clicked) {
-//           textarea.value += "\n";
-//           clicked = true;
-//         }
-//     });
-// }
-
-
 function getViajeID(){
    // Realizar una solicitud para obtener el ID del viaje desde tu API
     fetch('http://54.196.52.240:3000/viaje/1', {
@@ -22,6 +11,7 @@ function getViajeID(){
             if (response.ok) {
                 return response.json(); // Convertir la respuesta a JSON
             } else {
+              console.log(response)
               throw new Error('Error al obtener el ID del viaje');
             }
 
@@ -38,7 +28,7 @@ function getViajeID(){
           
                 if (contenidoNota === '') {
                   // Show message for empty note
-                  alert('Please write a note before saving.');
+                  alert('Por favor escriba algo antes de guardar  .');
                   return; // Stop execution if the note is empty
                 }
 
@@ -77,6 +67,7 @@ function PostNotaViaje(idViaje) {
     })
     .then(data => {
       console.log('Nota guardada:', data);
+      alert('Se guardo la nota')
       // Additional actions after successfully saving the note
     })
     .catch(error => {
@@ -86,8 +77,6 @@ function PostNotaViaje(idViaje) {
   
 
 
-// esta funcion
-// addLineBreakOnClick()
 getViajeID()
 
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
