@@ -17,7 +17,7 @@ function getViajeID(){
 
         })
         .then(data => {
-          idViaje = data.id;
+          let idViaje = data.id;
           console.log('ID del viaje:', idViaje);
           
           // After getting the trip ID, attach the event listener to the "Guardar" button
