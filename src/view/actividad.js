@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var form = document.getElementById('ActivityForm');
-    var btnGuardar = document.getElementById('btnGuardar');
-    var formattedDateTimeStart, formattedDateTimeEnd;
+    let btnGuardar = document.getElementById('btnGuardar');
+    let formattedDateTimeStart, formattedDateTimeEnd;
 
     const Query = window.location.search
     const URLParameters = new URLSearchParams(Query)
@@ -22,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     btnGuardar.addEventListener('click', function () {
         // Obtener valores de los campos
-        var nombreActividad = document.getElementById('activityName').value;
-        var Ubicacion = document.getElementById('location').value;
+        let nombreActividad = document.getElementById('activityName').value;
+        let Ubicacion = document.getElementById('location').value;
         formattedDateTimeStart = logDateTimeStart();
         formattedDateTimeEnd = logDateTimeEnd();
         console.log(nombreActividad)
@@ -33,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log('Actividad enviada correctamente.');
 
                 // Crear objeto con datos del formulario en el formato requerido
-                var formData = {
+                let formData = {
                     nombre: nombreActividad,
                     fecha_inicio: formattedDateTimeStart,
                     fecha_final: formattedDateTimeEnd,
@@ -41,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 };
 
                 // Configurar opciones para la solicitud fetch
-                var requestOptionsPost = {
+                let requestOptionsPost = {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -49,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     body: JSON.stringify(formData)
                 };
 
-                var requestOptionsPut = {
+                let requestOptionsPut = {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -105,12 +104,12 @@ function MostrarDatos(ViajeId, ActividadId){
         .then(response => response.json())
         .then(data => {
             
-            var dateStart = new Date(data.fecha_inicio)
-            var formatteddatestart = (dateStart.getDate() + 1) + '/' + (dateStart.getMonth() + 1) + '/' + dateStart.getFullYear()
+            let dateStart = new Date(data.fecha_inicio)
+            let formatteddatestart = (dateStart.getDate() + 1) + '/' + (dateStart.getMonth() + 1) + '/' + dateStart.getFullYear()
             document.getElementById('fechaInicio').value = formatteddatestart
 
-            var dateEnd = new Date(data.fecha_final)
-            var formatteddateend = (dateEnd.getDate() + 1) + '/' + (dateEnd.getMonth() + 1) + '/' + dateEnd.getFullYear()
+            let dateEnd = new Date(data.fecha_final)
+            let formatteddateend = (dateEnd.getDate() + 1) + '/' + (dateEnd.getMonth() + 1) + '/' + dateEnd.getFullYear()
             document.getElementById('fechaFinalizacion').value = formatteddateend
 
             document.getElementById('activityName').value = data.nombre
@@ -138,22 +137,18 @@ $(function(){
     });
     
     $('#startDatePicker').on('changeDate', function(e){
-        const selectedDate = e.date;
-        const selectedTime = $('#startTimePicker').val();
-        logDateTimeStart(selectedDate, selectedTime);
+        logDateTimeStart();
     });
 
     $('#endDatePicker').on('changeDate', function(e){
-        const selectedDate = e.date;
-        const selectedTime = $('#endTimePicker').val();
-        logDateTimeEnd(selectedDate, selectedTime);
+        logDateTimeEnd();
     });
 })
 
 function logDateTimeStart() {
     const selectedDate = $('#startDatePicker').datepicker('getDate');
     const selectedTime = $('#startTimePicker').val();
-    formattedDateTimeStart = getFormattedDateTime(selectedDate, selectedTime);
+    const formattedDateTimeStart = getFormattedDateTime(selectedDate, selectedTime);
     console.log(formattedDateTimeStart); // Puedes agregar esto si quieres mostrarlo en la consola
     return formattedDateTimeStart;
 }
@@ -161,7 +156,7 @@ function logDateTimeStart() {
 function logDateTimeEnd() {
     const selectedDate = $('#endDatePicker').datepicker('getDate');
     const selectedTime = $('#endTimePicker').val();
-    formattedDateTimeEnd = getFormattedDateTime(selectedDate, selectedTime);
+    const formattedDateTimeEnd = getFormattedDateTime(selectedDate, selectedTime);
     console.log(formattedDateTimeEnd); // Puedes agregar esto si quieres mostrarlo en la consola
     return formattedDateTimeEnd;
 }
