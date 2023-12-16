@@ -20,24 +20,36 @@
     <!-- Slick -->
     <link rel="stylesheet" type="text/css" href="assets/css/slick.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
-    <!-- TemplateMo 559 Zay Shop https://templatemo.com/tm-559-zay-shop -->
+<!--
+    
+TemplateMo 559 Zay Shop
+
+https://templatemo.com/tm-559-zay-shop
+
+-->
 </head>
 
 <body>
 
     <!-- Close Top Nav -->
 
+
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
+
             <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
                 Viaje
             </a>
+
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
-                <div class="flex-fill"></div>
+                <div class="flex-fill">
+
+                </div>
                 <div class="navbar align-self-center d-flex">
                     <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
                         <div class="input-group">
@@ -60,6 +72,7 @@
                     </a>
                 </div>
             </div>
+
         </div>
     </nav>
     <!-- Close Header -->
@@ -81,66 +94,76 @@
         </div>
     </div>
 
+
+
     <!-- Open Content -->
-    <section class="bg-light">
-        <div class="container pb-5">
-            <div class="row">
-                <div class="col-lg-5 mt-5">
-                    <!-- ... (código existente) ... -->
-                </div>
-                <!-- col end -->
-                <div class="col-lg-7 mt-5" style="margin-right: 1%;">
-                    <div class="card">
-                        <div class="card-body">
-                            <h1 class="h2">Agrega un viaje</h1>
-                            <!-- Nuevo formulario para agregar características del viaje -->
-                            <form action="" method="POST" id="viajeForm">
-                                <div class="mb-3">
-                                    <label for="nombreViaje" class="form-label">Nombre del viaje:</label>
-                                    <input type="text" class="form-control" id="nombreViaje" name="nombreViaje" required>
+   <!-- Open Content -->
+<section class="bg-light">
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-lg-5 mt-5">
+                <!-- ... (código existente) ... -->
+            </div>
+            <!-- col end -->
+            <div class="col-lg-7 mt-5" style="margin-right: 1%;">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="h2">Agrega un viaje</h1>
+
+                        <!-- Nuevo formulario para agregar características del viaje -->
+                        <form action="" method="POST">
+                            <div class="mb-3">
+                                <label for="nombreViaje" class="form-label">Nombre del viaje:</label>
+                                <input type="text" class="form-control" id="nombreViaje" name="nombreViaje" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="destino" class="form-label">Destino:</label>
+                                <input type="text" class="form-control" id="destino" name="destino" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="fechaInicio" class="form-label">Fecha de inicio:</label>
+                                <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="fechaFinalizacion" class="form-label">Fecha de finalización:</label>
+                                <input type="date" class="form-control" id="fechaFinalizacion" name="fechaFinalizacion" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tipoViaje" class="form-label">Tipo de viaje:</label>
+                                <select class="form-select" id="tipoViaje" name="tipoViaje" required>
+                                    <option value="aventura">Aventura</option>
+                                    <option value="relax">Relax</option>
+                                    <option value="negocios">Negocios</option>
+                                    <option value="familia">Familia</option>
+                                </select>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col d-grid">
+                                    <button type="button" class="btn btn-success btn-lg" id="btnGuardar">Guardar</button>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="destino" class="form-label">Destino:</label>
-                                    <input type="text" class="form-control" id="destino" name="destino" required>
+                                <div class="col d-grid">
+                                    <button type="button" class="btn btn-success btn-lg" id="btnBorrar">Borrar</button>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="fechaInicio" class="form-label">Fecha de inicio:</label>
-                                    <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="fechaFinalizacion" class="form-label">Fecha de finalización:</label>
-                                    <input type="date" class="form-control" id="fechaFinalizacion" name="fechaFinalizacion" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="tipoViaje" class="form-label">Tipo de viaje:</label>
-                                    <select class="form-select" id="tipoViaje" name="tipoViaje" required>
-                                        <option value="aventura">Aventura</option>
-                                        <option value="relax">Relax</option>
-                                        <option value="negocios">Negocios</option>
-                                        <option value="familia">Familia</option>
-                                    </select>
-                                </div>
-                                <div class="row pb-3">
-                                    <div class="col d-grid">
-                                        <button type="button" class="btn btn-success btn-lg" id="btnGuardar">Guardar</button>
-                                    </div>
-                                    <div class="col d-grid">
-                                        <button type="button" class="btn btn-success btn-lg" id="btnBorrar">Borrar</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
     <!-- Close Content -->
+
+    <!-- Start Article -->
+
+    <!-- End Article -->
+
 
     <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">
         <div class="container">
             <div class="row">
+
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-success border-bottom pb-3 border-light logo">Viaje Shop</h2>
                     <ul class="list-unstyled text-light footer-link-list">
@@ -182,6 +205,7 @@
                         <li><a class="text-decoration-none" href="#">Contact</a></li>
                     </ul>
                 </div>
+
             </div>
 
             <div class="row text-light mb-4">
@@ -219,12 +243,14 @@
                 <div class="row pt-2">
                     <div class="col-12">
                         <p class="text-left text-light">
-                            Copyright &copy; 2021 Company Name | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
+                            Copyright &copy; 2021 Company Name 
+                            | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
                         </p>
                     </div>
                 </div>
             </div>
         </div>
+
     </footer>
     <!-- End Footer -->
 
@@ -263,8 +289,7 @@
                     breakpoint: 480,
                     settings: {
                         slidesToShow: 2,
-                        slides,
-                        ToScroll: 3
+                        slidesToScroll: 3
                     }
                 }
             ]
